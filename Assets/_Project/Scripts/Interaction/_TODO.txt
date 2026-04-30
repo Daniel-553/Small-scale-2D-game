@@ -1,0 +1,11 @@
+Files in this folder so far:
+  InteractableData.cs   — ScriptableObject (done)
+
+Still to write:
+  IInteractable.cs   — interface { void Interact(); bool CanInteract { get; } }
+  Interactable.cs    — MonoBehaviour on each light-gray object; holds InteractableData ref.
+  NPC.cs             — same shape as Interactable but for NPCs (holds NPCData ref).
+  NPCData.cs         — ScriptableObject mirroring InteractableData.
+  Door.cs            — checks GameState.HasKey on interact.
+  Ladder.cs          — starts disabled; listens for the Room 3 NPC's OnDialogueFinished and enables itself.
+  KeyPickup.cs       — sets GameState.HasKey = true on collect.

@@ -1,0 +1,2 @@
+One asset per NPC. Same shape as InteractableData but for NPCs.
+  e.g. NPCData_OldMan.asset

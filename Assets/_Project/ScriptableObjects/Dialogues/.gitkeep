@@ -1,0 +1,3 @@
+One asset per dialogue. Create via: Right-click → Create → Game → Dialogue Data.
+Suggested naming: Dialogue_<Speaker>_<Room><Variant>.asset
+  e.g. Dialogue_NPC_Room2Hint.asset, Dialogue_Lamp_Room1.asset

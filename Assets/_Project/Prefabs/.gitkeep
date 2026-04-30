@@ -1,0 +1,4 @@
+Prefabs to create:
+  Player.prefab        — Rigidbody2D + PlayerController + PlayerInteractor + trigger collider
+  NPC.prefab           — Sprite + Collider2D (trigger) + NPC.cs
+  Interactable.prefab  — Sprite + Collider2D (trigger) + Interactable.cs

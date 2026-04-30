@@ -1,0 +1,3 @@
+TODO:
+  PlayerController.cs — Rigidbody2D top-down movement; respects DialogueRunner.IsRunning.
+  PlayerInteractor.cs — tracks IInteractable in trigger range; calls Interact() on the closest.

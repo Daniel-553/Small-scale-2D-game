@@ -1,0 +1,4 @@
+TODO:
+  Room.cs        — sits on the parent of each room; on player trigger enter, calls
+                   GameState.Instance.SetCurrentRoom(id).
+  RoomManager.cs — optional; camera snap / fade transitions between rooms.
