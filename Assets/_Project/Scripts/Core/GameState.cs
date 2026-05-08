@@ -3,16 +3,6 @@ using UnityEngine;
 
 namespace Game
 {
-    /// <summary>
-    /// The single source of truth for narrative state. Anything that needs to
-    /// know "which room am I in?" or "does the player have the key?" reads it
-    /// from here. Anything that mutates state goes through the setter methods
-    /// so OnStateChanged fires consistently.
-    ///
-    /// Implemented as a MonoBehaviour singleton so it survives scene loads
-    /// (DontDestroyOnLoad) and so its values are inspectable in the editor
-    /// at runtime — useful when debugging the narrative chain.
-    /// </summary>
     [DisallowMultipleComponent]
     public class GameState : MonoBehaviour
     {
@@ -24,7 +14,7 @@ namespace Game
         [SerializeField] private bool npcHintGivenInRoom2;
         [SerializeField] private bool ladderRevealedInRoom3;
 
-        /// <summary>Fires whenever any tracked field changes.</summary>
+        
         public event Action OnStateChanged;
 
         public RoomId CurrentRoom => currentRoom;
@@ -48,9 +38,7 @@ namespace Game
             if (Instance == this) Instance = null;
         }
 
-        // --- Mutators ---
-        // Each setter only fires the event when the value actually changes,
-        // so listeners aren't woken up by no-op writes.
+        
 
         public void SetCurrentRoom(RoomId room)
         {

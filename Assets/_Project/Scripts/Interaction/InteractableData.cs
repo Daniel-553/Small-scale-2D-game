@@ -2,12 +2,6 @@ using UnityEngine;
 
 namespace Game.Interaction
 {
-    /// <summary>
-    /// Data definition for a single interactable object (lamp, rug, chair, etc.).
-    /// One asset per object in the world. The same asset can be referenced by
-    /// the same object across all three rooms — the dialogue chosen depends on
-    /// the current GameState, not on which scene/room the asset lives in.
-    /// </summary>
     [CreateAssetMenu(
         fileName = "InteractableData_",
         menuName = "Game/Interactable Data",
@@ -35,11 +29,6 @@ namespace Game.Interaction
         [Tooltip("Played in Room 3.")]
         public DialogueData room3Dialogue;
 
-        /// <summary>
-        /// Selects the appropriate dialogue for the current narrative state.
-        /// Returning null is allowed — callers should treat it as "nothing to say"
-        /// and skip running a dialogue (rather than crashing).
-        /// </summary>
         public DialogueData GetDialogueFor(GameState state)
         {
             if (state == null) return null;
@@ -50,9 +39,6 @@ namespace Game.Interaction
                     return room1Dialogue;
 
                 case RoomId.Room2:
-                    // After the NPC has dropped the hint, some objects (like "object x"
-                    // and "object y") swap to a different line. If no override is set,
-                    // fall back to the default Room 2 dialogue.
                     if (state.NpcHintGivenInRoom2 && room2DialogueAfterHint != null)
                         return room2DialogueAfterHint;
                     return room2Dialogue;
@@ -68,7 +54,7 @@ namespace Game.Interaction
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            // Light sanity check so missing data is obvious in the inspector.
+            //Light sanity check so missing data is obvious in the inspector.
             if (string.IsNullOrEmpty(displayName))
                 displayName = name.Replace("InteractableData_", "");
         }

@@ -3,14 +3,7 @@ using UnityEngine;
 
 namespace Game.Interaction
 {
-    /// <summary>
-    /// The exit at the top of the ladder in Room 3. Has key → ends the demo.
-    /// No key → plays the "locked" line.
-    ///
-    /// "Ends the demo" is intentionally vague here — wire the OnExit UnityEvent
-    /// in the inspector to whatever you want (load a credits scene, fire an
-    /// event, show a UI). That keeps Door.cs free of any project-specific flow.
-    /// </summary>
+    
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Collider2D))]
     public class Door : MonoBehaviour, IInteractable

@@ -3,15 +3,7 @@ using UnityEngine;
 
 namespace Game.Interaction
 {
-    /// <summary>
-    /// Sits on each light-gray object in the world (lamp, rug, chair, etc.).
-    /// All it does is look up the right dialogue for the current state and
-    /// hand it to DialogueRunner. The "what to say in which room" smarts
-    /// live in InteractableData, not here.
-    ///
-    /// The same physical object can stay in the scene across all three rooms;
-    /// only its dialogue selection changes based on GameState.CurrentRoom.
-    /// </summary>
+    
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Collider2D))]
     public class Interactable : MonoBehaviour, IInteractable
@@ -28,8 +20,7 @@ namespace Game.Interaction
 
         private void Awake()
         {
-            // RequireComponent guarantees a collider exists; we just nudge it
-            // into trigger mode so it doesn't accidentally block movement.
+          
             var col = GetComponent<Collider2D>();
             col.isTrigger = true;
         }
@@ -42,8 +33,6 @@ namespace Game.Interaction
             var line = data.GetDialogueFor(state);
             if (line == null) return;
 
-            // Subscribe just for this one interaction, then unsubscribe.
-            // Avoids leaking handlers if the object is interacted with many times.
             void OnFinished(DialogueData finished)
             {
                 if (finished != line) return;
@@ -71,11 +60,6 @@ namespace Game.Interaction
         }
     }
 
-    /// <summary>
-    /// Tiny enum of post-dialogue side effects an interactable can trigger.
-    /// Kept in this file because it's only meaningful alongside Interactable.
-    /// Add cases here when new narrative beats need them.
-    /// </summary>
     public enum InteractableHook
     {
         None = 0,
