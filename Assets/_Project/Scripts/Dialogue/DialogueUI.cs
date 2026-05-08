@@ -4,6 +4,16 @@ using UnityEngine.UI;
 
 namespace Game.Dialogue
 {
+    /// <summary>
+    /// View layer for the dialogue popup. Sits on the DialogueBox prefab root.
+    /// Knows nothing about narrative — DialogueRunner pushes data into it.
+    ///
+    /// Hook this up in the inspector:
+    ///   - rootCanvasGroup: a CanvasGroup on the popup root (for show/hide + fade)
+    ///   - speakerLabel:    TMP_Text for the speaker name
+    ///   - lineLabel:       TMP_Text for the current line
+    ///   - continueButton:  Button that calls DialogueRunner.Instance.RequestAdvance()
+    /// </summary>
     [DisallowMultipleComponent]
     public class DialogueUI : MonoBehaviour
     {
@@ -41,6 +51,8 @@ namespace Game.Dialogue
         {
             if (speakerLabel == null) return;
             speakerLabel.text = speaker ?? string.Empty;
+            // Hide the label entirely when there's no speaker, so narration lines
+            // don't leave an empty box floating above the text.
             speakerLabel.gameObject.SetActive(!string.IsNullOrEmpty(speaker));
         }
 

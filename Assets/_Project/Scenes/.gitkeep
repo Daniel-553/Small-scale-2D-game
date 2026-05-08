@@ -1,2 +1,0 @@
-Main.unity — single scene containing all three rooms laid out side by side,
-the Player, the DialogueBox UI, and a _Systems GameObject hosting GameState + DialogueRunner.

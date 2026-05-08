@@ -2,6 +2,15 @@ using UnityEngine;
 
 namespace Game.Interaction
 {
+    /// <summary>
+    /// The ladder in Room 3 starts hidden. Once GameState.LadderRevealedInRoom3
+    /// flips to true (set by the NPC's Room 3 dialogue completing), the ladder
+    /// becomes visible/active and the player can use it to reach the door.
+    ///
+    /// Implementation detail: rather than wiring a specific NPC reference here,
+    /// we just listen for state changes. Anyone who sets the flag — the NPC,
+    /// a debug command, a save load — will trigger the same reveal.
+    /// </summary>
     [DisallowMultipleComponent]
     public class Ladder : MonoBehaviour
     {

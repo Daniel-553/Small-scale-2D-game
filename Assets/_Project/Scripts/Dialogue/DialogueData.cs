@@ -2,7 +2,11 @@ using UnityEngine;
 
 namespace Game.Dialogue
 {
-   
+    /// <summary>
+    /// A single linear dialogue: speaker name plus an ordered list of lines.
+    /// One asset per dialogue. Multiple InteractableData / NPCData assets can
+    /// reference the same DialogueData if they share lines.
+    /// </summary>
     [CreateAssetMenu(
         fileName = "Dialogue_",
         menuName = "Game/Dialogue Data",

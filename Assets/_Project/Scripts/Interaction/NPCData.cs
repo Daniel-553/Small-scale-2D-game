@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace Game.Interaction
 {
+    /// <summary>
+    /// Data definition for an NPC. Same shape as InteractableData but kept
+    /// separate so NPCs can grow their own fields later (portrait, voice,
+    /// idle animation) without polluting the interactable schema.
+    /// </summary>
     [CreateAssetMenu(
         fileName = "NPCData_",
         menuName = "Game/NPC Data",

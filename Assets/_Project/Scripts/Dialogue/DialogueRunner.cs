@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace Game.Dialogue
 {
+    /// <summary>
+    /// Single point of control for showing dialogues. Lives on a persistent
+    /// GameObject in the scene (e.g. attached to the DialogueBox UI prefab's root,
+    /// or a "_Systems" object). Player movement and other interactables should
+    /// check IsRunning and refuse input while a dialogue is active.
+    /// </summary>
     [DisallowMultipleComponent]
     public class DialogueRunner : MonoBehaviour
     {
@@ -17,13 +23,13 @@ namespace Game.Dialogue
                  "Prevents accidental skip when the player mashes the interact key.")]
         [SerializeField] private float minLineDuration = 0.15f;
 
-        
+        /// <summary>True while a dialogue is on screen.</summary>
         public bool IsRunning { get; private set; }
 
-        
+        /// <summary>Fires when a dialogue completes naturally (last line dismissed).</summary>
         public event Action<DialogueData> OnDialogueFinished;
 
-        
+        // --- Internal playback state ---
         private DialogueData current;
         private int lineIndex;
         private float lineShownAt;
@@ -49,7 +55,11 @@ namespace Game.Dialogue
             if (Instance == this) Instance = null;
         }
 
-        
+        /// <summary>
+        /// Starts playing the given dialogue. If another dialogue is already running,
+        /// the new request is ignored — callers should gate on IsRunning.
+        /// Passing null is a no-op (safe for InteractableData.GetDialogueFor returning null).
+        /// </summary>
         public void Play(DialogueData data)
         {
             if (data == null) return;
@@ -69,7 +79,10 @@ namespace Game.Dialogue
             StartCoroutine(RunRoutine(data));
         }
 
-        
+        /// <summary>
+        /// Called by the UI's Continue button (and/or by PlayerInteractor when the
+        /// interact key is pressed while a dialogue is active).
+        /// </summary>
         public void RequestAdvance()
         {
             if (!IsRunning) return;
@@ -99,7 +112,8 @@ namespace Game.Dialogue
             IsRunning = false;
             current = null;
 
-            
+            // Fire after state is fully cleared, so listeners that immediately
+            // start a new dialogue (e.g. chained NPC lines) don't get rejected.
             OnDialogueFinished?.Invoke(data);
         }
 

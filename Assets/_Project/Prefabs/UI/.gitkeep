@@ -1,2 +1,0 @@
-DialogueBox.prefab — Canvas-space UI with CanvasGroup + speaker label + line label + continue button.
-Wire its DialogueUI component fields in the inspector.
